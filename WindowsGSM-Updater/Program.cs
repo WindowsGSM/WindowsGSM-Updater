@@ -10,7 +10,7 @@ namespace WindowsGSM_Updater
     /// <summary>
     /// A small console program to update WindowsGSM
     /// </summary>
-    class Program
+    static class Program
     {
         private static string _wgsmPath;
 
@@ -30,10 +30,13 @@ namespace WindowsGSM_Updater
 
             foreach (string arg in args)
             {
-                switch (arg)
+                if (arg == "-autostart")
                 {
-                    case "-autostart": autostart = true; break;
-                    case "-forceupdate": forceupdate = true; break;
+                    autostart = true;
+                }
+                else if (arg == "-forceupdate")
+                {
+                    forceupdate = true;
                 }
             }
             #endregion
@@ -67,7 +70,7 @@ namespace WindowsGSM_Updater
                     Console.Out.Flush();
                     var responce = Console.ReadLine();
 
-                    if (!string.IsNullOrEmpty(responce) && responce.Trim().ToUpper() != "Y")
+                    if (!string.IsNullOrEmpty(responce) && responce.Trim().ToUpperInvariant() != "Y")
                     {
                         Environment.Exit(-1);
                     }
