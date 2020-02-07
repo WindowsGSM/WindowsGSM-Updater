@@ -79,6 +79,25 @@ namespace WindowsGSM_Updater
             #endregion
 
             #region Delete and Download
+
+            if (forceupdate)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Waiting WindowsGSM.exe exit...");
+
+                while (File.Exists(_wgsmPath))
+                {
+                    try
+                    {
+                        File.Delete(_wgsmPath);
+                    }
+                    catch
+                    {
+                        //ignore
+                    }
+                }
+            }
+
             Console.WriteLine();
             Console.WriteLine("Deleting WindowsGSM.exe...");
             DeleteWindowsGSM().Wait();
