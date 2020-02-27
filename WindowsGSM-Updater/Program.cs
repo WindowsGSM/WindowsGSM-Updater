@@ -151,6 +151,9 @@ namespace WindowsGSM_Updater
 
         private static string GetLatestVersion()
         {
+            //This fix https://media.discordapp.net/attachments/672192387749249034/680771835440398361/Capture.PNG
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             if (WebRequest.Create("https://api.github.com/repos/WindowsGSM/WindowsGSM/releases/latest") is HttpWebRequest webRequest)
             {
                 webRequest.Method = "GET";
